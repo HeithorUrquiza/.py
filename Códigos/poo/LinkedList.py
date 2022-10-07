@@ -78,5 +78,6 @@ print(lyst[4])
 lyst[4] = 100
 print(lyst)
 print(lyst.index(20))
+print(len(lyst))
 
 

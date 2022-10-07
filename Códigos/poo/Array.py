@@ -21,13 +21,13 @@ class Array():
     def __iter__(self):
         return iter(self.lyst)
     
-    def __getItem__(self, index):
+    def __getitem__(self, index):
         if 0 <= index < self.__len__():
             return self.lyst[index]
         else:
             raise Exception("Erro no index informado")
         
-    def __setItem__(self, index, newItem):
+    def __setitem__(self, index, newItem):
         if 0 <= index < self.__len__():
             self.lyst[index] = newItem
             self.logicalSize += 1
@@ -37,11 +37,13 @@ class Array():
     
         
 a = Array(5, None)
-for i in range(a.__len__() - 2):
-    value = int(input("Valor: "))
-    a.__setItem__(i, value)
+for i in range(4):
+    a[i] = i+1
+print(a)
 print(a.size())
-
+print(len(a))
+a[3] = 7
+print(a)
 
 
 

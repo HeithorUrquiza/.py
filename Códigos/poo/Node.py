@@ -17,10 +17,10 @@ class Node():
     def __str__(self):
         return self.__repr__()
     
-    def showNode(self):
+    def showNode(self): # Representação do nó
         return self.__str__()
     
-    def getIndex(self, index):
+    def getIndex(self, index): # Retorna o valor com base no indice
         pointer = head
         if index >= 0:
             while index > 0:
@@ -33,7 +33,7 @@ class Node():
         else:
             raise IndexError("Index out of range")
         
-    def getValue(self, value):
+    def getValue(self, value): # Confere se o valor está no nó
         pointer = head
         while pointer and value != pointer.data:
             pointer = pointer.next
@@ -42,7 +42,7 @@ class Node():
         else:
             raise ValueError(f"{value} is not in Node")
         
-    def setIndex(self, index, newValue):
+    def setIndex(self, index, newValue): # Altera o valor com base no índice
         pointer = head
         if index >= 0:
             while index > 0:
@@ -55,7 +55,7 @@ class Node():
         else:
             raise IndexError("Index out of range")
         
-    def setValue(self, value, newValue):
+    def setValue(self, value, newValue): # Altera o valor para um novo caso exista
         pointer = head
         while pointer and value != pointer.data:
             pointer = pointer.next
@@ -64,11 +64,11 @@ class Node():
         else:
             raise ValueError(f"{value} is not in Node")
         
-    def insertBegin(self, newItem):
+    def insertBegin(self, newItem): # Insere um valor no início
         global head
         head = Node(newItem, head)
         
-    def insertEnd(self, newItem):
+    def insertEnd(self, newItem): # Insere um valor no final
         global head
         newNode = Node(newItem)
         if head is None:
@@ -79,7 +79,7 @@ class Node():
                 pointer = pointer.next
             pointer.next = newNode
             
-    def insert(self, newItem, index):
+    def insert(self, newItem, index): # insere um valor em qualquer posição
         global head
         if self.getIndex(index):
             if head is None or index <= 0:
@@ -91,13 +91,13 @@ class Node():
                     index -= 1
                 pointer.next = Node(newItem, pointer.next)
             
-    def removeBegin(self):
+    def removeBegin(self): # Remove um item do início
         global head
         removedItem = head.data
         head = head.next
         return removedItem
             
-    def removeEnd(self):
+    def removeEnd(self): # Remove um item do final
         global head
         removedItem = head.data
         if head.next is None:
@@ -110,7 +110,7 @@ class Node():
             pointer.next = None
             return removedItem
         
-    def remove(self, index):
+    def remove(self, index): # Remove um item de qualquer posição
         global head
         if self.getIndex(index):
             if index <= 0 or head.next is None:

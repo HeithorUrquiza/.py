@@ -63,6 +63,37 @@ class LinkedList(): # classe pasa a criação de uma lista encadeada
             pointer = pointer.next
             i += 1
         raise ValueError(f"{value} is not in list")
+    
+    def insert(self, index, newElem):# Insere um elemento em qualquer poisção
+        node = Node(newElem)
+        if index == 0:
+            node.next = self.head
+            self.head = node
+        else:
+            pointer = self._getNode(index-1)
+            node.next = pointer.next
+            pointer.next = node
+        self._size += 1
+    
+    def remove(self, elem):
+        if self.head is None:
+            raise ValueError(f"{elem} isn't in list")
+        elif self.head.data == elem:
+            self.head = self.head.next
+            self._size -= 1
+            return True
+        else:
+            ancestor = self.head
+            pointer = self.head.next
+            while(pointer):
+                if pointer.data == elem:
+                    ancestor.next = pointer.next
+                    pointer.next = None
+                ancestor = pointer
+                pointer = pointer.next
+            self._size -= 1
+            return True
+        raise ValueError(f"{elem} isn't in list")
         
 
 # Testes das funções/Métodos
@@ -78,6 +109,9 @@ print(lyst[4])
 lyst[4] = 100
 print(lyst)
 print(lyst.index(20))
-print(len(lyst))
+lyst.insert(3, 30)
+print(lyst)
+print(lyst.remove(30))
+print(lyst)
 
 

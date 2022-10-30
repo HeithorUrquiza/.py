@@ -31,8 +31,12 @@ class ListStack():
     def __str__(self):
         return self.__repr__()
     
-    def __contains__(self):
-        pass
+    def __contains__(self, elem):
+        for value in self.stack:
+            if elem == value:
+                return True
+        return False
+        
     
     def __add__(self):
         pass
@@ -56,17 +60,7 @@ class ListStack():
             return self.stack[-1]
         else:
             raise IndexError("The stack is empty")
-        
-        
-stack = ListStack()
-stack.push(1)
-stack.push(10)
-stack.push(20)
-stack.push(-3)
-print(stack)
-print(len(stack))
-stack.clear()
-print(len(stack))
+    
 
     
     

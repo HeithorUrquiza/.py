@@ -1,4 +1,4 @@
-from raw import NewNode
+from Node import Node
 
 class Stack:
     
@@ -8,7 +8,7 @@ class Stack:
         
     def push(self, item): 
         # Insere um elemento na pilha
-        node = NewNode.Node(item)
+        node = Node(item)
         node.next = self.top
         self.top = node
         self._size += 1
@@ -19,7 +19,7 @@ class Stack:
             node = self.top
             self.top = self.top.next
             self._size -= 1
-            return self.top.data
+            return node.data
         raise IndexError ("The stack is empty")
         
     def peek(self):
@@ -35,7 +35,7 @@ class Stack:
         r = ""
         pointer = self.top
         while(pointer):
-            r = r + str(self.top.data) + "\n"
+            r = r + str(pointer.data) + "\n"
             pointer = pointer.next
         return r      
     
@@ -48,7 +48,8 @@ class Stack:
         while(pointer):
             if pointer.data == item:
                 return True
-        raise ValueError ("This value isn't in the Stack!")
+            pointer = pointer.next
+        return False
         
     
     def isEmpty(self):

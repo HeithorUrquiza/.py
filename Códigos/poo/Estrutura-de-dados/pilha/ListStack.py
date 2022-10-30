@@ -1,6 +1,3 @@
-from hashlib import new
-
-
 class ListStack():
     
     def __init__(self):

@@ -18,7 +18,7 @@ class Queue:
         i += 1
       return r
     else:
-      return "Queue empty !!"
+      return "Empty queue!!"
     
 
   def __str__(self):

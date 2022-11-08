@@ -1,3 +1,5 @@
+
+'''
 from Queue import Queue
 
 queue = Queue()
@@ -14,10 +16,8 @@ queue.pop()
 queue.pop()
 print(queue)
 print(queue.peek())
-
-''' ----------------------------------------- 
-Teste Queue com lista python
-
+'''
+'''
 from ListQueue import Queue
 
 queue = Queue()

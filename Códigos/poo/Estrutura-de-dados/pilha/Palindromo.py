@@ -7,12 +7,17 @@ def isPalindrome(palavra):
         palindrome.push(i)
     count = 0
     for i in word:
-        if palindrome.pop() == i:
-            count += 1
-    if count == len(word):
-        return True
-    else: 
-        return False     
+        if palindrome.pop() != i:
+            return False
+    return True    
     
     
-print(isPalindrome("Revive"))
+def main():
+    word = input("\nDigite a palavra: ")
+    if isPalindrome(word):
+        print("\nEsta palavra é um palindromo !!\n")
+    else:
+        print("\nEsta palavra NÃO é um palindromo !!\n")
+
+
+main()

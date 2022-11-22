@@ -12,7 +12,7 @@ class MaxHeap:
 
 
     def isEmpty(self):
-        if self.size == 0:
+        if self._size == 0:
             return True
         return False
 
@@ -57,63 +57,57 @@ class MaxHeap:
         self.lyst.append(item)
         i = len(self.lyst) - 1
         while i > 0:
-            parentIndex = i//2
-            parentItem = self.lyst[parentIndex]
-            # Elemento chegou na raiz da árvore
-            if parentItem == None or parentItem >= item:
-                break
+            indexParent = i//2
+            
+            if self.lyst[indexParent] != None and item > self.lyst[indexParent]:
+                self.lyst[i] = self.lyst[indexParent]
+                self.lyst[indexParent] = item
             else:
-                self.lyst[i] = self.lyst[parentIndex]
-                self.lyst[parentIndex] = item
-                i = parentIndex
+                break
+            i = indexParent
         self._size += 1
 
 
     def pop(self): #equivale a função demote nos slides
-        if self._size < 1:
-            print("Não há raiz")
-            return None
-        aux = self.lyst[1]
-        self.lyst[1] = self.lyst[-1]
-        self.lyst[-1] = aux
+        if self.isEmpty():
+            raise AttributeError("Max Heap is empty")
         
-        self.lyst.pop(len(self.lyst) - 1)
-        self._size -= 1
+        root = self.lyst[1]
+        lastItem = self.lyst[-1]
+        self.lyst[1] = lastItem
+        self.lyst.pop(-1)
         
-        position = 1
-        while(True):
-            if self.left_child(position) != None and self.right_child(position) != None:
-                if (self.left_child(position) > self.lyst[position]) and (self.left_child(position) > self.right_child(position)):
-                    aux = self.left_child(position)
-                    self.lyst[2 * position] = self.lyst[position]
-                    self.lyst[position] = aux
-                if(self.left_child(position) != None and self.right_child(position) != None):
-                    if (self.right_child(position) > self.lyst[position]) and (self.right_child(position) > self.left_child(position)):
-                        aux = self.right_child(position)
-                        self.lyst[2 * position + 1] = self.lyst[position]
-                        self.lyst[position] = aux
-            elif self.left_child(position) != None:
-                if self.left_child(position) > self.lyst[position]:
-                    aux = self.left_child(position)
-                    self.lyst[2 * position] = self.lyst[position]
-                    self.lyst[position] = aux
-            elif self.right_child(position) != None:
-                if self.right_child(position) > self.lyst[position]:
-                    aux = self.right_child(position)
-                    self.lyst[2 * position + 1] = self.lyst[position]
-                    self.lyst[position] = aux
-            elif self.right_child(position) is None and self.left_child(position) is None:
-                return
-            position += 1
-            if self.right_child(position) is None and self.left_child(position) is None:
-                return
-            elif self.right_child(position) != None and self.left_child(position) is None:
-                if self.right_child(position) < self.lyst[position]:
-                    return
-            elif self.right_child(position) is None and self.left_child(position) != None:
-                if self.left_child(position) < self.lyst[position]:
-                    return
+        i = 1
+        lastIndex = len(self.lyst) - 1
         
+        while True:
+            leftIndex = 2 * i
+            rightIndex = 2 * i + 1
+            if lastIndex > rightIndex:
+                if self.lyst[leftIndex] >= self.lyst[rightIndex]:
+                    if lastItem < self.lyst[leftIndex]:
+                        self.lyst[i] = self.lyst[leftIndex]
+                        self.lyst[leftIndex] = lastItem
+                        i = leftIndex
+                    else:
+                        self._size -= 1
+                        return root
+                else:
+                    if lastItem < self.lyst[rightIndex]:
+                        self.lyst[i] = self.lyst[rightIndex]
+                        self.lyst[rightIndex] = lastItem
+                        i = rightIndex
+                    else:
+                        self._size -= 1
+                        return root
+            else:
+                if lastIndex >= leftIndex:
+                    if lastItem < self.lyst[leftIndex]:
+                        self.lyst[i] = self.lyst[leftIndex]
+                        self.lyst[leftIndex] = lastItem
+                        
+                self._size -= 1
+                return root
 
     def min_item(self):
         minItem = self.lyst[-1]
@@ -136,8 +130,10 @@ class MaxHeap:
     
     
 if __name__ == "__main__":
-    list = [None, 18, 14, 15, 9, 8, 4, 6]
-    a = MaxHeap(list)
-    print(a.parent(3))
+    list = [None, 10, 7, 5, 4, 3]
+    heap = MaxHeap(list)
+    print(heap)
+    heap.pop()
+    print(heap)
     
     

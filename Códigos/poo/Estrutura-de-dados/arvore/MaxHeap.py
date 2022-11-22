@@ -70,36 +70,57 @@ class MaxHeap:
 
 
     def pop(self): #equivale a função demote nos slides
-        topItem = self.lyst[1]
-        bottomItem = self.lyst[-1]
-        self.lyst[1] = bottomItem
+        if self._size < 1:
+            print("Não há raiz")
+            return None
+        aux = self.lyst[1]
+        self.lyst[1] = self.lyst[-1]
+        self.lyst[-1] = aux
         
-        i = 1
-        lastIndex = len(self.lyst) - 1
-        
-        while True:
-            leftIndex = 2 * i
-            rightIndex = 2 * i + 1
-            if leftIndex > lastIndex:
-                return print(topItem)
-            if self.lyst[leftIndex] > self.lyst[rightIndex]:
-                maxChild = self.lyst[leftIndex]
-                if bottomItem < maxChild:
-                    self.lyst[leftIndex] = self.lyst[i]
-                    self.lyst[i] = maxChild
-                    i = leftIndex
-            else:
-                maxChild = self.lyst[rightIndex]
-                if bottomItem < maxChild:
-                    self.lyst[rightIndex] = self.lyst[i]
-                    self.lyst[i] = maxChild
-                    i = rightIndex
+        self.lyst.pop(len(self.lyst) - 1)
         self._size -= 1
+        
+        position = 1
+        while(True):
+            if self.left_child(position) != None and self.right_child(position) != None:
+                if (self.left_child(position) > self.lyst[position]) and (self.left_child(position) > self.right_child(position)):
+                    aux = self.left_child(position)
+                    self.lyst[2 * position] = self.lyst[position]
+                    self.lyst[position] = aux
+                if(self.left_child(position) != None and self.right_child(position) != None):
+                    if (self.right_child(position) > self.lyst[position]) and (self.right_child(position) > self.left_child(position)):
+                        aux = self.right_child(position)
+                        self.lyst[2 * position + 1] = self.lyst[position]
+                        self.lyst[position] = aux
+            elif self.left_child(position) != None:
+                if self.left_child(position) > self.lyst[position]:
+                    aux = self.left_child(position)
+                    self.lyst[2 * position] = self.lyst[position]
+                    self.lyst[position] = aux
+            elif self.right_child(position) != None:
+                if self.right_child(position) > self.lyst[position]:
+                    aux = self.right_child(position)
+                    self.lyst[2 * position + 1] = self.lyst[position]
+                    self.lyst[position] = aux
+            elif self.right_child(position) is None and self.left_child(position) is None:
+                return
+            position += 1
+            if self.right_child(position) is None and self.left_child(position) is None:
+                return
+            elif self.right_child(position) != None and self.left_child(position) is None:
+                if self.right_child(position) < self.lyst[position]:
+                    return
+            elif self.right_child(position) is None and self.left_child(position) != None:
+                if self.left_child(position) < self.lyst[position]:
+                    return
         
 
     def min_item(self):
-        self.lyst.reverse()
-        return self.lyst[-1]
+        minItem = self.lyst[-1]
+        for i in self.lyst:
+            if(i != None and minItem > i):
+                minItem = i
+        return minItem
 
 
     def left_child(self, index):

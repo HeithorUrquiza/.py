@@ -1,3 +1,5 @@
+import sys
+
 class MaxHeap:
     
     def __init__(self, lyst = None):
@@ -34,7 +36,7 @@ class MaxHeap:
         return False
 
 
-    def __add__(self, other): #Refazer/analisar
+    def __add__(self, other):
         if type(self) == type(other):
             for item in other:
                 self.push(item)
@@ -55,47 +57,57 @@ class MaxHeap:
         self.lyst.append(item)
         i = len(self.lyst) - 1
         while i > 0:
-            parentIndex = i//2
-            parentItem = self.lyst[parentIndex]
-            # Elemento chegou na raiz da árvore
-            if parentItem == None or parentItem >= item:
-                break
+            indexParent = i//2
+            
+            if self.lyst[indexParent] != None and item > self.lyst[indexParent]:
+                self.lyst[i] = self.lyst[indexParent]
+                self.lyst[indexParent] = item
             else:
-                self.lyst[i] = self.lyst[parentIndex]
-                self.lyst[parentIndex] = item
-                i = parentIndex
+                break
+            i = indexParent
         self._size += 1
 
 
-    def pop(self): #equivale a função demote nos slides // PS: descobrir com resolver isso daq
-        if self._size <= 1:
-            return -1
+    def pop(self): #equivale a função demote nos slides
+        if self.isEmpty():
+            raise AttributeError("Max Heap is empty")
         
-        current = 1
-        popped = self.lyst[1]
-        self.lyst[1] = self.lyst[self._size - 1]
-        self._size -= 1
+        root = self.lyst[1]
+        lastItem = self.lyst[-1]
+        self.lyst[1] = lastItem
+        self.lyst.pop(-1)
         
-        while((2 * current) < self._size):
-            child = 0
-            if (2 * current + 1) == self._size:
-                child = 2 * current
-            else:
-                if self.lyst[2 * current] > self.lyst[2 * current + 1]:
-                    child = 2 * current
+        i = 1
+        lastIndex = len(self.lyst) - 1
+        
+        while True:
+            leftIndex = 2 * i
+            rightIndex = 2 * i + 1
+            if lastIndex > rightIndex:
+                if self.lyst[leftIndex] >= self.lyst[rightIndex]:
+                    if lastItem < self.lyst[leftIndex]:
+                        self.lyst[i] = self.lyst[leftIndex]
+                        self.lyst[leftIndex] = lastItem
+                        i = leftIndex
+                    else:
+                        self._size -= 1
+                        return root
                 else:
-                    child = 2 * current + 1
-            
-            if self.lyst[current] < self.lyst[child]:
-                aux = self.lyst[current]
-                self.lyst[current] = self.lyst[child]
-                self.lyst[child] = aux
-                
-                current = child
+                    if lastItem < self.lyst[rightIndex]:
+                        self.lyst[i] = self.lyst[rightIndex]
+                        self.lyst[rightIndex] = lastItem
+                        i = rightIndex
+                    else:
+                        self._size -= 1
+                        return root
             else:
-                break
-        return popped
-        
+                if lastIndex >= leftIndex:
+                    if lastItem < self.lyst[leftIndex]:
+                        self.lyst[i] = self.lyst[leftIndex]
+                        self.lyst[leftIndex] = lastItem
+                        
+                self._size -= 1
+                return root
 
     def min_item(self):
         minItem = self.lyst[-1]

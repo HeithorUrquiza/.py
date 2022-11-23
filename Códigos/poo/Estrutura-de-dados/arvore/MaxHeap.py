@@ -1,5 +1,3 @@
-import sys
-
 class MaxHeap:
     
     def __init__(self, lyst = None):
@@ -12,7 +10,7 @@ class MaxHeap:
 
 
     def isEmpty(self):
-        if self.size == 0:
+        if self._size == 0:
             return True
         return False
 
@@ -36,7 +34,7 @@ class MaxHeap:
         return False
 
 
-    def __add__(self, other):
+    def __add__(self, other): #Refazer/analisar
         if type(self) == type(other):
             for item in other:
                 self.push(item)
@@ -69,50 +67,34 @@ class MaxHeap:
         self._size += 1
 
 
-    def pop(self): #equivale a função demote nos slides
-        if self._size < 1:
-            print("Não há raiz")
-            return None
-        aux = self.lyst[1]
-        self.lyst[1] = self.lyst[-1]
-        self.lyst[-1] = aux
+    def pop(self): #equivale a função demote nos slides // PS: descobrir com resolver isso daq
+        if self._size <= 1:
+            return -1
         
-        self.lyst.pop(len(self.lyst) - 1)
+        current = 1
+        popped = self.lyst[1]
+        self.lyst[1] = self.lyst[self._size - 1]
         self._size -= 1
         
-        position = 1
-        while(True):
-            if self.left_child(position) != None and self.right_child(position) != None:
-                if (self.left_child(position) > self.lyst[position]) and (self.left_child(position) > self.right_child(position)):
-                    aux = self.left_child(position)
-                    self.lyst[2 * position] = self.lyst[position]
-                    self.lyst[position] = aux
-                if(self.left_child(position) != None and self.right_child(position) != None):
-                    if (self.right_child(position) > self.lyst[position]) and (self.right_child(position) > self.left_child(position)):
-                        aux = self.right_child(position)
-                        self.lyst[2 * position + 1] = self.lyst[position]
-                        self.lyst[position] = aux
-            elif self.left_child(position) != None:
-                if self.left_child(position) > self.lyst[position]:
-                    aux = self.left_child(position)
-                    self.lyst[2 * position] = self.lyst[position]
-                    self.lyst[position] = aux
-            elif self.right_child(position) != None:
-                if self.right_child(position) > self.lyst[position]:
-                    aux = self.right_child(position)
-                    self.lyst[2 * position + 1] = self.lyst[position]
-                    self.lyst[position] = aux
-            elif self.right_child(position) is None and self.left_child(position) is None:
-                return
-            position += 1
-            if self.right_child(position) is None and self.left_child(position) is None:
-                return
-            elif self.right_child(position) != None and self.left_child(position) is None:
-                if self.right_child(position) < self.lyst[position]:
-                    return
-            elif self.right_child(position) is None and self.left_child(position) != None:
-                if self.left_child(position) < self.lyst[position]:
-                    return
+        while((2 * current) < self._size):
+            child = 0
+            if (2 * current + 1) == self._size:
+                child = 2 * current
+            else:
+                if self.lyst[2 * current] > self.lyst[2 * current + 1]:
+                    child = 2 * current
+                else:
+                    child = 2 * current + 1
+            
+            if self.lyst[current] < self.lyst[child]:
+                aux = self.lyst[current]
+                self.lyst[current] = self.lyst[child]
+                self.lyst[child] = aux
+                
+                current = child
+            else:
+                break
+        return popped
         
 
     def min_item(self):
@@ -136,8 +118,10 @@ class MaxHeap:
     
     
 if __name__ == "__main__":
-    list = [None, 18, 14, 15, 9, 8, 4, 6]
-    a = MaxHeap(list)
-    print(a.parent(3))
+    list = [None, 10, 7, 5, 4, 3]
+    heap = MaxHeap(list)
+    print(heap)
+    heap.pop()
+    print(heap)
     
     

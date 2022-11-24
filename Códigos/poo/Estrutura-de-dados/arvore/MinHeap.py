@@ -53,15 +53,32 @@ class MinHeap:
 
     def push(self, item): #equivale a função promote nos slides
         self.lyst.append(item)
-        i = self._size
-        stop = False
-        while (i//2 > 0) and stop == False:
+        self._size += 1
+        i = len(self.lyst) - 1
+        
+        while i > 0:
+            indexParent = i//2
+            
+            if self.lyst[1] > self.lyst[i]: #Se o último item for menor do que a raiz
+                aux = self.lyst[1]
+                self.lyst[1] = self.lyst[i]
+                self.lyst[i] = aux
+            
+            if self.lyst[indexParent] != None and item < self.lyst[indexParent]:
+                self.lyst[i] = self.lyst[indexParent]
+                self.lyst[indexParent] = item
+            else:
+                break
+            i = indexParent
+        
+        
+        
+        '''i = self._size - 1
+        while (i//2 > 0):
             if self.lyst[i] < self.lyst[i//2]:
                 self.lyst[i], self.lyst[i//2] = self.lyst[i//2], self.lyst[i]
-            else:
-                stop = True
             i = i//2
-        self._size += 1
+        self._size += 1'''
         
 
     def pop(self): #equivale a função demote nos slides
@@ -69,16 +86,19 @@ class MinHeap:
             raise AttributeError("Min heap is empty")
         
         root = self.lyst[1]
-        self.lyst[1] = self.lyst[-1]
+        lastItem = self.lyst[-1]
+        self.lyst[1] = lastItem
         self.lyst.pop(-1)
         
         i = 1
+        rightIndex = 2 * i + 1
+        leftIndex = 2 * i
         while (i * 2) <= self._size:
             minChild = 0
             if (i * 2) + 1 > self._size:
                 minChild = i * 2
             else:
-                if self.lyst[i * 2] < self.lyst[(i * 2) + 1]:
+                if self.lyst[leftIndex] < self.lyst[rightIndex]:
                     minChild = i * 2
                 else:
                     minChild = (i * 2) + 1
@@ -88,7 +108,7 @@ class MinHeap:
             i = minChild
         self._size -= 1
         return root
-
+            
     
     def max_item(self):
         maxItem = self.lyst[-1]
@@ -112,7 +132,8 @@ class MinHeap:
   
     
 if __name__ == "__main__":
-    list = [None, 2, 7, 9, 1]
+    list = [None, 1, 3, 2, 7]
     heap = MinHeap(list)
-    heap.pop()
+    heap.push(10)
+    heap.push(0)
     print(heap)

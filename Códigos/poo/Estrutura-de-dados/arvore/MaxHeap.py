@@ -118,11 +118,17 @@ class MaxHeap:
 
 
     def left_child(self, index):
-        return self.lyst[2 * index]
+        if 2 * index > len(self.lyst) - 1:
+            return IndexError("This child is empty")
+        else:
+            return self.lyst[2 * index]
 
 
     def right_child(self, index):
-        return self.lyst[(2 * index) + 1]
+        if (2 * index) + 1 > len(self.lyst) - 1:
+            return IndexError("This child is empty")
+        else:
+            return self.lyst[(2 * index) + 1]
 
 
     def parent(self, index):
@@ -132,8 +138,15 @@ class MaxHeap:
 if __name__ == "__main__":
     list = [None, 10, 7, 5, 4, 3]
     heap = MaxHeap(list)
+    heap.push(9)
     print(heap)
     heap.pop()
     print(heap)
+    print(heap.left_child(3))
+    print(heap.right_child(3))
+    print(heap.parent(3))
+    print(heap.peek())
+    print(0 in heap)
+    print(heap.isEmpty())
     
     

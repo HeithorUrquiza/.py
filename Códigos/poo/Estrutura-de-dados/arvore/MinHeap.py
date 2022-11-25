@@ -31,7 +31,7 @@ class MinHeap:
         for value in self.lyst:
             if item == value:
                 return True
-            return False
+        return False
 
 
     def __add__(self, other):
@@ -80,24 +80,8 @@ class MinHeap:
                     self.lyst[i] = self.lyst[rightChild]
                     self.lyst[rightChild] = aux
                     
-            i+=1
-            '''indexParent = i//2
-            leftChild = 2 * indexParent
-            rightChild = 2 * indexParent + 1
-            
-            if self.lyst[indexParent] != None: 
-                if self.lyst[leftChild] != None and self.lyst[indexParent] > self.lyst[leftChild]: 
-                    aux = self.lyst[indexParent]
-                    self.lyst[indexParent] = self.lyst[leftChild]
-                    self.lyst[leftChild] = aux
-            
-            if self.lyst[indexParent] != None:
-                if rightChild == i and self.lyst[indexParent] > self.lyst[rightChild]:
-                    aux = self.lyst[indexParent]
-                    self.lyst[indexParent] = self.lyst[rightChild]
-                    self.lyst[rightChild] = aux'''
-            
-            self._size += 1
+            i+=1    
+        self._size += 1
         
 
     def pop(self): #equivale a função demote nos slides
@@ -145,11 +129,17 @@ class MinHeap:
     
     
     def left_child(self, index):
-        return self.lyst[2 * index]
+        if 2 * index > len(self.lyst) - 1:
+            return IndexError("This child is empty")
+        else:
+            return self.lyst[2 * index]
         
         
     def right_child(self, index):
-        return self.lyst[(2 * index) + 1]
+        if (2 * index) + 1 > len(self.lyst) - 1:
+            return IndexError("This child is empty")
+        else:
+            return self.lyst[(2 * index) + 1]
 
 
     def parent(self, index):
@@ -165,7 +155,11 @@ if __name__ == "__main__":
     heap.push(-1)
     print(heap)
     heap.pop()
-    heap.pop()
-    heap.pop()
     print(heap)
     print(heap.max_item())
+    print(heap.left_child(3))
+    print(heap.right_child(3))
+    print(heap.parent(3))
+    print(heap.isEmpty())
+    print(heap.peek())
+    print(-1 in heap)

@@ -51,34 +51,53 @@ class MinHeap:
         return self.lyst[1]
 
 
-    def push(self, item): #equivale a função promote nos slides
+    def push(self, item): #equivale a função promote nos slides 
         self.lyst.append(item)
-        self._size += 1
-        i = len(self.lyst) - 1
         
-        while i > 0:
-            indexParent = i//2
+        if (self.lyst[1] > self.lyst[-1]):
+            aux = self.lyst[1]
+            self.lyst[1] = self.lyst[-1]
+            self.lyst[-1] = aux
+        
+        i = 1
+        while True:
+            leftChild = 2 * i
+            rightChild = 2 * i + 1
             
-            if self.lyst[1] > self.lyst[i]: #Se o último item for menor do que a raiz
-                aux = self.lyst[1]
-                self.lyst[1] = self.lyst[i]
-                self.lyst[i] = aux
-            
-            if self.lyst[indexParent] != None and item < self.lyst[indexParent]:
-                self.lyst[i] = self.lyst[indexParent]
-                self.lyst[indexParent] = item
-            else:
+            if leftChild > len(self.lyst) - 1:
                 break
-            i = indexParent
-        
-        
-        
-        '''i = self._size - 1
-        while (i//2 > 0):
-            if self.lyst[i] < self.lyst[i//2]:
-                self.lyst[i], self.lyst[i//2] = self.lyst[i//2], self.lyst[i]
-            i = i//2
-        self._size += 1'''
+            elif self.lyst[i] != None: 
+                if self.lyst[leftChild] != None and self.lyst[i] > self.lyst[leftChild]: 
+                    aux = self.lyst[i]
+                    self.lyst[i] = self.lyst[leftChild]
+                    self.lyst[leftChild] = aux
+            
+            if rightChild > len(self.lyst) - 1:
+                break
+            elif self.lyst[i] != None:
+                if self.lyst[rightChild] != None and self.lyst[i] > self.lyst[rightChild]:
+                    aux = self.lyst[i]
+                    self.lyst[i] = self.lyst[rightChild]
+                    self.lyst[rightChild] = aux
+                    
+            i+=1
+            '''indexParent = i//2
+            leftChild = 2 * indexParent
+            rightChild = 2 * indexParent + 1
+            
+            if self.lyst[indexParent] != None: 
+                if self.lyst[leftChild] != None and self.lyst[indexParent] > self.lyst[leftChild]: 
+                    aux = self.lyst[indexParent]
+                    self.lyst[indexParent] = self.lyst[leftChild]
+                    self.lyst[leftChild] = aux
+            
+            if self.lyst[indexParent] != None:
+                if rightChild == i and self.lyst[indexParent] > self.lyst[rightChild]:
+                    aux = self.lyst[indexParent]
+                    self.lyst[indexParent] = self.lyst[rightChild]
+                    self.lyst[rightChild] = aux'''
+            
+            self._size += 1
         
 
     def pop(self): #equivale a função demote nos slides
@@ -91,21 +110,28 @@ class MinHeap:
         self.lyst.pop(-1)
         
         i = 1
-        rightIndex = 2 * i + 1
-        leftIndex = 2 * i
-        while (i * 2) <= self._size:
-            minChild = 0
-            if (i * 2) + 1 > self._size:
-                minChild = i * 2
-            else:
-                if self.lyst[leftIndex] < self.lyst[rightIndex]:
-                    minChild = i * 2
-                else:
-                    minChild = (i * 2) + 1
+        while True:
+            leftChild = 2 * i
+            rightChild = 2 * i + 1
             
-            if self.lyst[i] > self.lyst[minChild]:
-                self.lyst[i], self.lyst[minChild] = self.lyst[minChild], self.lyst[i]
-            i = minChild
+            if leftChild > len(self.lyst) - 1: 
+                break
+            elif self.lyst[i] != None: 
+                if self.lyst[leftChild] != None and self.lyst[i] > self.lyst[leftChild]: 
+                    aux = self.lyst[i]
+                    self.lyst[i] = self.lyst[leftChild]
+                    self.lyst[leftChild] = aux
+            
+            if rightChild > len(self.lyst) - 1:
+                break
+            elif self.lyst[i] != None:
+                if self.lyst[rightChild] != None and self.lyst[i] > self.lyst[rightChild]:
+                    aux = self.lyst[i]
+                    self.lyst[i] = self.lyst[rightChild]
+                    self.lyst[rightChild] = aux
+                    
+            i+=1
+            
         self._size -= 1
         return root
             
@@ -134,6 +160,12 @@ class MinHeap:
 if __name__ == "__main__":
     list = [None, 1, 3, 2, 7]
     heap = MinHeap(list)
-    heap.push(10)
+    heap.push(4)
     heap.push(0)
+    heap.push(-1)
     print(heap)
+    heap.pop()
+    heap.pop()
+    heap.pop()
+    print(heap)
+    print(heap.max_item())

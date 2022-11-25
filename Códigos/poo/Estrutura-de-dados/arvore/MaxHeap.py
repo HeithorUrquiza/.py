@@ -53,7 +53,7 @@ class MaxHeap:
         return self.lyst[1]
 
 
-    def push(self, item): #equivale a função promote nos slides
+    def push(self, item): #equivale a função promote nos slides 
         self.lyst.append(item)
         i = len(self.lyst) - 1
         while i > 0:
@@ -68,7 +68,7 @@ class MaxHeap:
         self._size += 1
 
 
-    def pop(self): #equivale a função demote nos slides
+    def pop(self): #equivale a função demote nos slides [None, 3, 2, 7]
         if self.isEmpty():
             raise AttributeError("Max Heap is empty")
         

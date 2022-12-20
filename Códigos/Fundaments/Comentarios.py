@@ -27,4 +27,15 @@
     
     * CAST -> conversão de um tipo de dado para outro    
     
+    _________________________________________________________________________________________________________________________________
+    
+    TIPOS DE DADOS
+    
+    > type() => mostra qual é o tipo do dado
+    
+    - Numérico: 1, 100, 1_000_000
+    - Float/Real/Decimal: 1.2, 3.99, 1_000.00 
+    - Complex: basta adicionar j ao final (ex: 5j)
+    - Booleano: True ou False | NOT: not + variável => inverte o valor lógico da variável
+    - String: Todo dado envolvido por aspas simples('') ou duplas("") | Slice de String -- ex: print(nome[0:5]) | [::-1] -> Comece do primeiro elemtno, vá até o último e inverta
 """

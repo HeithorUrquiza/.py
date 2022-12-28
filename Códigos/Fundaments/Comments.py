@@ -83,22 +83,78 @@
         
     _________________________________________________________________________________________________________________________________
     
-    ESTRUTURAS DE REPETIÇÃO 27:46
+    ESTRUTURAS DE REPETIÇÃO 
     
     --> Utilizadas para iterar sobre sequências ou sobre valores iteráveis
     
     -- Loop for
     nome = 'Robertão'
     lista = [1, 2, 3, 4, 5]
+    
     for num in lista:
         print(num)
     print()
+    
     for letra in nome:
         print(letra)
     print()
+    
     for i in range(5): #Similar a um array [0, 1, 2, 3, 4]
         print(i)
+
+    nome = 'Heithor'
+    for i, v in enumerate(nome): #Podemos usar o '_' para ocultar valores que não vamos usar
+        print(f'{i} = {v}') #end = '' para não saltar linha no loop
+        
+    
+    -- Ranges
+    > Utilizados para gerar sequências númericas de forma especificada
+    
+    * Forma 1
+    for i in range(11): #Vai de 0 a 10
+        print(i)
+        
+    * Forma 2
+    for i in range(1, 11): #Inicio especificado, mas o final permanece uma a casa a menos
+        print(i)
+        
+    * Forma 3
+    for i in range(1, 10, 2): #Especificando o paço (no exemplo de 2 em 2)
+        print(i)
+        
+    * Forma 4 (Inverso)
+    for i in range(10, 0, -1):
+        print(i) 
+        
+    
+    -- Loop While    
+    > Cuidado com as condições de parada (loop infinito)
+
+    * Exempo 1
+    num = 1
+    while(num < 10):
+        print(num)
+        num += 1    
+        
+    * Exemplo 2
+    resp = ''
+    while resp != 'Sim':
+        resp = input('Deseja parar? ').title()
+        
+        
+    -- Break
+    > Responsável por encerrar os loops em alguns casos
+    for num in range(1, 10):
+    if num == 6:
+        break
+    print(num)
+    
+    while(True):
+    resp = input('Sair? ').title()   
+    if resp == 'Sim':
+        break  
 """
-nome = 'Heithor'
-for i, v in enumerate(nome): #Podemos usar o '_' para ocultar valores que não vamos usar
-    print(f'{i} = {v}')
+
+  
+
+

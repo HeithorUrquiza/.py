@@ -1,5 +1,7 @@
 import numpy as np
-primeiro = [2, 4, 7]
-num_primeiro = np.array(primeiro)
 
-print(type(num_primeiro))
+anos_nascimento = np.loadtxt('C:\\Users\\heith\\OneDrive\\Documentos\\GitHub\\Python_cods\\forfun\\anos.txt')
+idades = 2021 - anos_nascimento
+
+media = idades.sum() / idades.size
+print(media)

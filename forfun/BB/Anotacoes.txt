@@ -83,6 +83,7 @@ ________________________________________________________________________________
     - Criação de gráficos
 
 
+
 >> CRIANDO UM GRÁFICO
 
     dados = np.linspace(0, 100, 80) #Inicio, final e altura
@@ -128,6 +129,7 @@ ________________________________________________________________________________
     - timeSeries (tempos em séries)
 
 
+
 >> CONCEITOS BÁSICOS
     import numpy as np
     import pandas as pd
@@ -167,3 +169,40 @@ ________________________________________________________________________________
     print(escola)
 
 
+
+>> PRATICANDO UM POUCO
+    - Pesquisando os últimos concursos
+
+        import pandas as pd
+        import numpy as np
+
+        concursos = pd.read_csv('C:\\Users\\heith\\OneDrive\\Documentos\\GitHub\\Python_cods\\forfun\\BB\\concursos.csv', ';')
+
+        print(concursos)
+        print(concursos.salario) #Print 'exclusivo'
+
+        bancas = concursos['banca']
+        bancas.drop_duplicates(inplace=True)
+        bancas.index = ['primeiro', 'segundo', 'terceiro', 'quarto']
+
+        bancas = bancas.append(pd.Series(['fgv', 'quadrix'], #Adicionando novos dados
+                                        index=['tensa', 'nova']))
+
+        print(bancas.isin(bancas))
+        print(concursos.banca.isin(bancas))
+
+        print(concursos.info()) #Informações sobre o DataFrame
+        print(concursos.head()) #Mostra os 5 primeiros elem por padrão tail() mostra os últimos 5
+
+_________________________________________________________________________________________________________________________________
+
+► SCIKIT LEARN ◄
+    → Biblioteca para aprendizado de máquina
+    - Classificação
+    - Regressão / Predição
+    - Associação
+    - Agrupamento
+
+_________________________________________________________________________________________________________________________________
+
+Tempo da aula: 3:25:15

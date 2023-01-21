@@ -78,5 +78,92 @@ ________________________________________________________________________________
 
 _________________________________________________________________________________________________________________________________
 
-► MATPLOTLIB ◄ -> Plotar gráficos
+► MATPLOTLIB ◄ 
+    - Plotar gráficos
     - Criação de gráficos
+
+
+>> CRIANDO UM GRÁFICO
+
+    dados = np.linspace(0, 100, 80) #Inicio, final e altura
+
+
+    plt.bar(['bacen', 'tcu', 'bb', 'stf'], [10, 20, 15, 34])
+    plt.show()
+
+    plt.pie([10, 20, 15, 34], labels=['bacen', 'tcu', 'bb', 'stf'])
+    plt.legend()
+    plt.show()
+
+
+
+    plt.subplot(1, 2, 1) #Posicionar os gráfico (linha, coluna, qual gráfico)
+    plt.plot([1, 2, 3, 4], [2, 5, 3, 9], 
+            label='vendas',
+            marker='o',
+            linestyle='dotted',
+            color='r')
+            
+    plt.xlabel('dias')
+    plt.ylabel('quantidade de vendas')
+    plt.legend()
+    plt.title('Gráfico de Vendas por Dia')
+    plt.grid()         
+            
+    plt.subplot(1, 2, 2)
+    plt.plot([1, 2, 3, 4], [3, 2, 5, 8],
+            label= 'Média Geral',
+            color='green')
+
+    plt.title('Média de vendas')
+    plt.legend()
+
+    plt.suptitle('Relatório de Vendas Anual') #Dá nome à página como um todo
+    plt.show()
+
+_________________________________________________________________________________________________________________________________
+
+► PANDAS ◄
+    - Ferramenta poderosa para analise de dados
+    - timeSeries (tempos em séries)
+
+
+>> CONCEITOS BÁSICOS
+    import numpy as np
+    import pandas as pd
+
+    # Series
+    list_python = [10, 20, 30, 40 , 50]
+    pandas_series = pd.Series(list_python, ['dia_1', 'dia_2', 'dia_3', 'dia_4', 'dia_5'])
+
+    print(pandas_series[2])
+    print(pandas_series['dia_3']) #Buscando valor através da chave
+    print(pandas_series.dia_3) 
+    print(pandas_series + 1)
+    print(pandas_series.median())
+
+
+    # Data Frame
+    dados_concursos = {
+        'banca': ['cespe', 'cesgranrio'],
+        'instituição': ['tcu', 'bb'],
+        'salario': [25000, 3300],
+        'data da prova': [pd.to_datetime('20/01/18'),
+                        pd.to_datetime('10/09/21')]
+    }
+
+    tabela_concursos = pd.DataFrame(dados_concursos)
+    print(tabela_concursos)
+    print(tabela_concursos.dtypes)
+
+
+    alunos = [
+        ['Raphael', 10, True],
+        ['Nodico', 7, True],
+        ['Caliman', 4, False]
+    ]
+
+    escola = pd.DataFrame(alunos, columns=['Nome', 'Nota', 'Aprovado'])
+    print(escola)
+
+

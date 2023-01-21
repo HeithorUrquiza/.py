@@ -6,3 +6,10 @@
 2015
 1951
 1988
+
+-------------------------
+
+Já instalados
+- NumPy
+- MATPLOTLIB
+- PANDAS

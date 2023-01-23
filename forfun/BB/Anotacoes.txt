@@ -238,3 +238,41 @@ ________________________________________________________________________________
 
 _________________________________________________________________________________________________________________________________
 
+► BANCO DE DADOS ◄
+
+>> CHAVE PRIMÁRIA
+    - Unicidade
+    - Irredutibilidade
+    - A escolhida
+    - Simples ou Composta
+    - Não pode ter valores nulos
+
+→ Chaves estrangeiras: presente apenas em modelos relacionais (tabelas)
+
+
+
+>> Normalização: reduz a redundância e as anomalias de atualização
+    - 1FN: Colunas atômicas
+    - 2FN: Sem chaves primárias compostas (dependência parcial)
+    - 3FN: Sem dependências funcionais transitivas
+
+_________________________________________________________________________________________________________________________________
+
+► BIG DATA ◄
+    - Conjunto de dados cuja escala, diversidade e complexidade exigem novas arquiteturas, técnicas, algoritmos e análises para gerenciá-lo e extrair valor deles e conhecimento oculto
+
+
+
+>> OS 5V'S DE BIG DATA
+    - Volume: Dados em repouso
+    - Velocidade: Dados em movimento
+    - Variedade: Dados em diferentes formas
+    - Veracidade: Dados em dúvida
+    - Valor: Dados em dinheiro
+
+
+
+>> MONGO DB
+    - Banco de Dados orientado a documentos
+    - Facilita o dimensionamento
+    - Um mecanismo de particionamento baseado em intervalo conhecido como sharding

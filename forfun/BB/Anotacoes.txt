@@ -203,6 +203,38 @@ ________________________________________________________________________________
     - Associação
     - Agrupamento
 
+
+
+>> EXEMPLO DE APRENDIZADO DE MÁQUINA COM BANCO DE TESTES
+    from sklearn import datasets
+    from sklearn.model_selection import train_test_split
+    from sklearn.neighbors import KNeightborsClassifier
+
+    iris = datasets.load_iris()
+    X, y = iris.data, iris.target
+
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_stata=42)
+
+    knn = KNeightborsClassifier(n_neighbors=3) #Pega os 'vizinhos' mais próximos e classifica o ponto(dado)
+
+    knn.fit(X_train, y_train) #Constroi o modelo de treino
+
+    test_accuracy = knn.score(X_test, y_test)
+
+    predicition = knn.predict(X_test) #Previsão de novos dados
+
+
+
+>> APRENDIZADO DE MÁQUINA
+    - Supervisionado: Labels/rótulos estão definidos na base de dado
+        • Modelo de predição (ex: SVM, Regressão, KNN, Bayesiano)
+        • Palavra chave: classificar
+
+    - Não supervisionado: Rótulos não estão definidos
+        • Modelo descritivo (ex: K-Means{Agrupmaento ou Clusterização})
+
+    - Semi-supervisionado: Apenas parte dos rótulos estão definidos
+    - Por reforço: Se aprimora com feedbacks do ambiente real
+
 _________________________________________________________________________________________________________________________________
 
-Tempo da aula: 3:25:15

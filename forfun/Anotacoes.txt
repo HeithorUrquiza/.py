@@ -1,0 +1,82 @@
+► NUMPY ◄
+
+>> Um pacote fundamental para ciência da computação em Python
+
+
+
+>> ndarray(core do NumPy) vs standard python
+	- ndarray possui tamanho fixo, diferente do tamanho dinâmico do python
+	- ndarray os dados são homogêneos(mesmo tipo) x heterogêneo(tipos diferentes)
+	- facilita cálculos matemáticos de uma grande quantidade de dados x programação tradicional
+	- desempenho infinitamente melhor(otimização na compilação)
+	- consumo de memória eficiente(menos memória consumida)
+	
+
+
+>> MULTIPLICANDO ARRAYS COM NUMPY
+    '''
+    import numpy as np
+    primeiro = [2, 3, 4]
+    segundo = [5, 7, 8]
+
+    num_primeiro = np.array(primeiro)
+    num_segundo = np.array(segundo)
+    num_resultado = num_primeiro * num_segundo
+
+    print(num_resultado)
+    '''
+
+    - Vectorization: ausência de qualquer uso explícito de estrutura de laço
+        • "Behind the scenes" código otimizado / pré-compilado
+    
+    - Muito mais rápido que a multiplicação normal do python
+
+
+
+>> ARRAYS 1D, 2D e 3D
+    
+    import numpy as np
+
+    array1d = np.arange(10)
+    print(array1d)
+    print(array1d.ndim)
+
+    print('------------------')
+    array2d = np.arange(10).reshape(2, 5)
+    print(array2d)
+    print(array2d[1, 2])
+    print(array2d.ndim)
+
+    print('------------------')
+    array3d = np.arange(24).reshape(2, 3, 4)
+    print(array3d)
+    print(array3d.ndim)
+    
+
+    • Exemplo prático (Média de idades)
+
+        import numpy as np
+
+        anos_nascimento = np.loadtxt('C:\\Users\\heith\\OneDrive\\Documentos\\GitHub\\Python_cods\\forfun\\anos.txt')
+        idades = 2021 - anos_nascimento
+
+        media = idades.sum() / idades.size
+        print(media)
+
+
+
+>> PEGUINHA
+    - Forma correta: np.array([1, 2, 3, 4]) → Recebe como parêmtro um array
+
+_________________________________________________________________________________________________________________________________
+
+► SCIPY ◄
+    - Coleção de algoritmos matemáticos e funções pré construídas em cima do NumPy
+    - Manipular e visualizar dados
+    - Funções matemáticas disponiveis
+        → airy, elliptic, bessel, gamma, beta, hypergeometric, parabolic, cylinder, mathieu, spheroidal wave, struve and kelvin
+
+_________________________________________________________________________________________________________________________________
+
+► MATPLOTLIB ◄ -> Plotar gráficos
+    - Criação de gráficos

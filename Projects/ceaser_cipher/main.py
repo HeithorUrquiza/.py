@@ -47,6 +47,5 @@ def start():
             
         elif answer.lower() == 'yes':
             system('cls')
-            continue
         
 start()

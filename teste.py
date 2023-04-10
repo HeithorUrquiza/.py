@@ -3,8 +3,5 @@ starting_dictionary = {
     "b": 8,
 }
 
-final_dictionary = {}
-
-final_dictionary = starting_dictionary["c"] = 7
-
-print(final_dictionary)
+for key in starting_dictionary:
+    print(starting_dictionary[key])

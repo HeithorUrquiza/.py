@@ -63,6 +63,7 @@ def calculate_score(user, computer):
 
 
 def play():
+    print(logo)
     users_cards = []
     computers_cards = []
 
@@ -70,6 +71,8 @@ def play():
     users_cards.append(deal_card())
     computers_cards.append(deal_card())
     computers_cards.append(deal_card())
+    
+    print("")
 
 
     

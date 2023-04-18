@@ -23,8 +23,13 @@ class Menu:
     def get_items(self):
         """Returns all the names of the available menu items"""
         options = ""
+        cont = 0
         for item in self.menu:
-            options += f"{item.name}/"
+            if cont == 2:
+                options += f"{item.name}"
+            else:
+                options += f"{item.name}/"
+            cont += 1
         return options
 
 

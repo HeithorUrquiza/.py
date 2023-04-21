@@ -1,50 +1,32 @@
 from turtle import Turtle, Screen
 import random
+import turtle as t
+
+
 
 tom = Turtle()
 tom.shape("classic")
-tom.speed(7)
+tom.speed(70)
 tom.penup()
-tom.setpos(-50, 70)
+t.colormode(255)
+angles = [0, 90, 180, 270]
 
-colors = ['red', 'dark olive green', 'goldenrod', 'orchid', 'midnight blue', 'slate gray', 'dodger blue', 'yellow green']
-comands = [tom.forward(100), tom.backward(100), tom.right(100), tom.left(100)]
 
-'''def random_walk():
-    tom.pendown()
-    size = 1
-    for _ in range(100):
-        color = random.choice(colors)
-        tom.pencolor(color)
-        
-        random.choice(comands)()
-    tom.pensize(size)
-    size += 0.3'''
+def random_color():
+    r = random.randint(0, 255)
+    g = random.randint(0, 255)
+    b = random.randint(0, 255)
     
+    return (r, g, b)
+
+
 tom.pendown()
-random.choice(comands)
-        
-
-
-
-
-
-
-'''def draw_shapes():
-    tom.pendown()
-    color = ['Green', 'BlueViolet', 'Chocolate', 'DarkOrange', 'Blue', 'DarkRed', 'Lime', 'Gold']
-    step = 3
+for _ in range(90):
+    tom.pencolor(random_color())
+    tom.circle(120)
+    tom.setheading(tom.heading() + 4)
     
-    for i in color:
-        tom.pencolor(i)
-        angle = 360 / step
-        
-        for n in range(step):
-            tom.forward(100)
-            tom.right(angle)
-        step += 1
-        
-draw_shapes() '''     
+  
 
 screen = Screen()
 screen.exitonclick()

@@ -2,9 +2,10 @@ from turtle import Turtle, Screen
 import random
 import turtle as t
 
+tim = t.Turtle('turtle')
+tim.color("red")
 
-
-tom = Turtle()
+""" tom = Turtle()
 tom.shape("classic")
 tom.speed(70)
 tom.penup()
@@ -24,7 +25,7 @@ tom.pendown()
 for _ in range(90):
     tom.pencolor(random_color())
     tom.circle(120)
-    tom.setheading(tom.heading() + 4)
+    tom.setheading(tom.heading() + 4)"""
     
   
 

@@ -8,17 +8,17 @@ class Scoreboard(Turtle):
         super().__init__()
         self.hideturtle()
         self.penup()
-        self.goto(-190, 265)
-        self.current_score = 0
+        self.goto(-280, 265)
+        self.current_level = 1
         self.show_score()
         
         
     def show_score(self):
-        self.write(f"Score: {self.current_score}", False, 'right', FONT)
+        self.write(f"Level: {self.current_level}", False, 'left', FONT)
         
         
     def update_score(self):
-        self.current_score += 1
+        self.current_level += 1
         self.clear()
         self.show_score()
         

@@ -39,8 +39,5 @@ total_squirrels = {
 total_frame = pandas.DataFrame(total_squirrels)
 total_frame.to_csv('testes/total-squirrels.csv') """
 
-for c in range(7):
-    print('o')
-    
-    if c == 2:
-        break
+#list comprehension new_list = [new_item for item in list if test]
+# dictionary comprehesion = {new_key:new_value for (key, value) in dict.items() if test}

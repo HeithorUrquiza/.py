@@ -19,10 +19,7 @@ while len(correct_answers) < 50:
     user_answer = screen.textinput(f'{len(correct_answers)}/50 States Correct', 'What\'s anothe state name?').title()
 
     if user_answer == 'Exit':
-        to_learn = []
-        for state in states:
-            if state not in correct_answers:
-                to_learn.append(state)
+        to_learn = [state for state in states if state not in correct_answers]
         df = pandas.DataFrame(to_learn)
         df.to_csv('Projects/Intermediate/us-states/states_to_learn.csv')
         break

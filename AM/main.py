@@ -5,6 +5,9 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np  
 from zlib import crc32
+from sklearn.model_selection import StratifiedShuffleSplit
+from sklearn.impute import SimpleImputer
+from sklearn.preprocessing import OrdinalEncoder
 
 PATH = "AM/housing.csv"
 
@@ -42,7 +45,40 @@ def split_train_test_by_id(data, test_ratio, id_column):
     in_test_set = ids.apply(lambda id_:test_set_check(id_, test_ratio))
     return data.loc[~in_test_set], data.loc[in_test_set]
 
+
 housing = load_housing_data()
-train_set, test_set = split_train_test(housing, 0.2)
-print(len(train_set))
-print(len(test_set))
+housing_wiht_id = housing.reset_index()
+housing_wiht_id["id"] = housing["longitude"] * 1000 + housing["latitude"]
+housing["income_cat"] = pd.cut(housing["median_income"], bins=[0., 1.5, 3.0, 4.5, 6., np.inf], labels=[1, 2, 3, 4, 5])
+
+split = StratifiedShuffleSplit(n_splits=1, test_size=0.2, random_state=42)
+
+for train_index, test_index in split.split(housing, housing["income_cat"]):
+    strat_train_set = housing.loc[train_index]
+    strat_test_set = housing.loc[test_index]
+
+#train_set, test_set = split_train_test_by_id(housing_wiht_id, 0.2, "id")
+
+for set_ in (strat_train_set, strat_test_set):
+    set_.drop("income_cat", axis=1, inplace=True)
+    
+housing = strat_train_set.drop("median_house_value", axis=1)
+housing_labels = strat_train_set["median_house_value"].copy()
+
+median = housing["total_bedrooms"].median()
+housing["total_bedrooms"].fillna(median, inplace=True)
+
+imputer = SimpleImputer(strategy="median")
+housing_num = housing.drop("ocean_proximity", axis=1)
+imputer.fit(housing_num)
+
+X = imputer.transform(housing_num)
+housing_tr = pd.DataFrame(X, columns=housing_num.columns, index=housing_num.index)
+
+housing_cat = housing[["ocean_proximity"]]
+
+#Classificando textos
+ordinal_encoder = OrdinalEncoder()
+housing_cat_encoded = ordinal_encoder.fit_transform(housing_cat)
+
+print(housing_cat_encoded[:10])

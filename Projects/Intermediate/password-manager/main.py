@@ -1,4 +1,4 @@
-from UIsteup import UIsetup
+from utils.UI_steup import UISetup
 
-ui = UIsetup()
+ui = UISetup()
 ui.run_gui()

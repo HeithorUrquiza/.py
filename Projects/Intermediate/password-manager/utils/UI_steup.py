@@ -1,9 +1,9 @@
 from tkinter import *
 from tkinter import messagebox
-from JsonDocument import JsonDocument
-from PasswordGenerator import PasswordGenerator
+from utils.json_document import JsonDocument
+from utils.password_generator import PasswordGenerator
 
-class UIsetup:
+class UISetup:
     
     def __init__(self):
         self.window = Tk()
@@ -28,7 +28,7 @@ class UIsetup:
 
     def config_img(self):
         self.canvas = Canvas(width=200, height=200)
-        self.password_icon = PhotoImage(file="Projects/Intermediate/password-manager/change-password.png")
+        self.password_icon = PhotoImage(file="Projects\Intermediate\password-manager\logo\change-password.png")
         self.canvas.create_image(130, 100, image=self.password_icon)
         self.canvas.grid(column=1, row=0)
         
@@ -37,7 +37,7 @@ class UIsetup:
         self.website_entry.grid(column=1, row=1)
         self.website_entry.focus()
         self.mail_entry.grid(column=1, row=2, columnspan=2)
-        self.mail_entry.insert(END, "contato.hecthorur@gmail.com")
+        self.mail_entry.insert(END, "@gmail.com")
         self.password_entry.grid(column=1, row=3)
         
         

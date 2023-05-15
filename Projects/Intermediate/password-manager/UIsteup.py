@@ -1,6 +1,6 @@
 from tkinter import *
 from tkinter import messagebox
-from SaveDoc import SaveDoc
+from JsonDocument import JsonDocument
 from PasswordGenerator import PasswordGenerator
 
 class UIsetup:
@@ -13,12 +13,13 @@ class UIsetup:
         self.user_label = Label(text="User/Email:", padx=3, pady=5).grid(column=0, row=2)
         self.website_label = Label(text="Website:", padx=3, pady=5).grid(column=0, row=1)
         self.password_label = Label(text="Password:", padx=3, pady=7).grid(column=0, row=3)
-        self.website_entry = Entry(width=50)
-        self.mail_entry = Entry(width=50)
-        self.password_entry = Entry(width=31)
+        self.website_entry = Entry(width=34)
+        self.mail_entry = Entry(width=52)
+        self.password_entry = Entry(width=33)
         self.config_entries()
-        self.generate_button = Button(text="Generate Password", padx=2, command=self.get_password).grid(column=2, row=3)
-        self.add_button = Button(text="Add", width=42, command=self.save_data).grid(column=1, row=4, columnspan=2)
+        self.generate_button = Button(text="Generate Password", command=self.get_password).grid(column=2, row=3)
+        self.add_button = Button(text="Add", width=44, command=self.save_data).grid(column=1, row=4, columnspan=2)
+        self.search_button = Button(text="Search", padx=2, width=13, command=self.find_login).grid(column=2, row=1)
 
 
     def run_gui(self):
@@ -33,7 +34,7 @@ class UIsetup:
         
         
     def config_entries(self):
-        self.website_entry.grid(column=1, row=1, columnspan=2)
+        self.website_entry.grid(column=1, row=1)
         self.website_entry.focus()
         self.mail_entry.grid(column=1, row=2, columnspan=2)
         self.mail_entry.insert(END, "contato.hecthorur@gmail.com")
@@ -44,14 +45,16 @@ class UIsetup:
         if not self.website_entry.get() or not self.password_entry.get():
             messagebox.showwarning("Error", "Please don't leave any field empty")
         else:
-            is_ok = messagebox.askokcancel("Attetion", f"The datas inserted was:\nEmail: {self.mail_entry.get()}\nPassword: {self.password_entry.get()}\nIs it right?")
+            data = JsonDocument()
+            data.save(website=self.website_entry.get().title(), email=self.mail_entry.get(), password=self.password_entry.get())
+            self.website_entry.delete(0, END)
+            self.password_entry.delete(0, END)
+            self.website_entry.focus()
             
-            if is_ok:
-                self.data = SaveDoc()
-                self.data.save(website=self.website_entry.get(), email=self.mail_entry.get(), password=self.password_entry.get())
-                self.website_entry.delete(0, END)
-                self.password_entry.delete(0, END)
-                self.website_entry.focus()
+            
+    def find_login(self):
+        data = JsonDocument()
+        data.consult(self.website_entry.get().title(), messagebox)
                 
                 
     def get_password(self):

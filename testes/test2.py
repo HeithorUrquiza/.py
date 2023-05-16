@@ -1,4 +1,4 @@
-def subsc_candidates():
+""" def subsc_candidates():
     N = int(input())
     candidates = []
 
@@ -19,4 +19,12 @@ def evaluate_candidates(list):
 
 candidates_list = subsc_candidates()
 print("\n")
-evaluate_candidates(candidates_list)
+evaluate_candidates(candidates_list) """
+
+import random
+
+a = [1, 2, 3, 4,  5]
+b = random.choice(a)
+print(b, b.__index__())
+a.remove(b.__index__())
+print(a)

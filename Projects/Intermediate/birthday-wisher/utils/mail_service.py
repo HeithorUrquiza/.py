@@ -3,8 +3,8 @@ import datetime as dt
 from utils.file_manager import FilesManager
 
 PLACEHOLDER = "[NAME]"
-EMAIL = "heithorur@gmail.com"
-PASSWORD = "zuafczxqizjirsum"
+EMAIL = "heithorur@gamil.com"
+PASSWORD = "fydxhwwynomqtiny"
 
 class MailService:
     

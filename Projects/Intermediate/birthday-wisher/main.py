@@ -1,4 +1,4 @@
-# smtp.gmail.com
+""" # smtp.gmail.com
 # smtp.mail.yahoo.com
 
 import smtplib
@@ -26,4 +26,9 @@ def get_weekday():
     return data.strftime("%a")
 
 quote = read_txt()
-send_email(quote)
+send_email(quote) """
+
+from utils.mail_service import MailService
+
+app = MailService()
+app.send_email()

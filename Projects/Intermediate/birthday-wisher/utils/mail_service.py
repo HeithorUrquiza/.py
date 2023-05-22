@@ -1,10 +1,14 @@
 import smtplib
 import datetime as dt
+import os
 from utils.file_manager import FilesManager
+from dotenv import load_dotenv
+
+load_dotenv()
 
 PLACEHOLDER = "[NAME]"
-EMAIL = "heithorur@gamil.com"
-PASSWORD = "fydxhwwynomqtiny"
+EMAIL = "heithorur@gmail.com"
+PASSWORD = os.getenv("EMAIL_PASSWORD")
 
 class MailService:
     

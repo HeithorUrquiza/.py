@@ -10,5 +10,13 @@
     "Pythonanywhere": {
         "email": "contato.hecthorur@gmail.com",
         "password": "Lq*oagY00vF&3+za"
+    },
+    "Openweather": {
+        "email": "heithor.urquiza@estudantes.ifg.edu.br",
+        "password": "pTj6yeJb7Lb6_C2"
+    },
+    "Twilio": {
+        "email": "heithor.urquiza@estudantes.ifg.edu.br",
+        "password": "J07(G$#PjV(4TRm45"
     }
 }

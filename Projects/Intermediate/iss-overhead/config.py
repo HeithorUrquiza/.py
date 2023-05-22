@@ -1,12 +1,16 @@
 import requests
 import smtplib
+import os
 from datetime import datetime
+from dotenv import load_dotenv
 import time
+
+load_dotenv()
 
 MY_LAT = -16.406330
 MY_LONG = -49.218719
 EMAIL = "heithorur@gmail.com"
-PASSWORD = "zuafczxqizjirsum"
+PASSWORD = os.getenv("EMAIL_PASSWORD")
 
 class ISSAlert:
     

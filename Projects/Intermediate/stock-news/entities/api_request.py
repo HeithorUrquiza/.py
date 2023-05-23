@@ -1,8 +1,6 @@
 import requests
 import os
-import html
 from dotenv import load_dotenv
-
 
 load_dotenv()
 
@@ -13,7 +11,8 @@ PARAMETERS_STOCK = {
 }
 
 PARAMETERS_NEWS = {
-    "q": "tesla",
+    "q": "Tesla",
+    "searchIn": "title",
     "apikey": os.getenv("NEWS_API_KEY")
 }
 
@@ -34,7 +33,7 @@ class APIRequest:
         
         
     def news_req(self):
-        resp = requests.get("https://newsapi.org/v2/top-headlines", params=PARAMETERS_NEWS)
+        resp = requests.get("https://newsapi.org/v2/everything", params=PARAMETERS_NEWS)
         resp.raise_for_status()
         self.data_news = resp.json()
        
@@ -42,7 +41,7 @@ class APIRequest:
     def check_percent(self):
         daily_list = [value for (key, value) in self.data_stock.items()]
         yestday_closing = float(daily_list[0]["4. close"])
-        bf_yestday_closing = float(daily_list[2]["4. close"])
+        bf_yestday_closing = float(daily_list[1]["4. close"])
         percent_of_diff = round(((yestday_closing - bf_yestday_closing) / yestday_closing) * 100, 2)
         self.percent = percent_of_diff
     
@@ -50,6 +49,7 @@ class APIRequest:
     def get_news_details(self):
         self.news_req()
         news = self.data_news["articles"][0:3]
-        news_details = [(html.unescape(new["title"]), html.unescape(new["description"])) for new in news]
+        news_details = [f"Title:: {new['title']}\nDescrip:: {new['description']}" for new in news]
+        #news_details = [(new["title"], new["description"]) for new in news]
             
         return news_details

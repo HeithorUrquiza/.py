@@ -1,10 +1,14 @@
 import requests
-import datetime
+import datetime as df
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 #Criando um usuário
 pixela_endpoint = "https://pixe.la/v1/users"
-USER = "heith0r"
-TOKEN = "Q!)s+mz*2cxBc8"
+USER = os.getenv("USER")
+TOKEN = os.getenv("TOKEN")
 
 USER_PARAMS = {
     "token": TOKEN,
@@ -48,10 +52,30 @@ graph_update = {
 #Postando um pixels no gráfico
 pixel_endpoint = f"{pixela_endpoint}/{USER}/graphs/graph1"
 
+today = df.datetime.now()
+
 commit_graph = {
-    "date":"20230524",
+    "date":today.strftime("%Y%m%d"),
     "quantity":"30"
 }
 
-resp = requests.post(url=pixel_endpoint, json=commit_graph, headers=headers)
+#resp = requests.post(url=pixel_endpoint, json=commit_graph, headers=headers)
+#print(resp.text) 
+
+
+#Atualizando um pixel
+pixel_update_endpoint = f"{pixela_endpoint}/{USER}/graphs/graph1/20230224"
+
+update_pixels = {
+    "quantity":"120"
+}
+
+#resp = requests.put(url=pixel_update_endpoint, json=update_pixels, headers=headers)
+#print(resp.text)
+
+
+#Deletando um pixel
+pixel_delete_endpoint = f"{pixela_endpoint}/{USER}/graphs/graph1/20230224"
+
+resp = requests.delete(url=pixel_delete_endpoint, headers=headers)
 print(resp.text)

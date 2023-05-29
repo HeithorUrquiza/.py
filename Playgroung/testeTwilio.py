@@ -16,12 +16,12 @@ print(message.sid) """
 from twilio.rest import Client
 
 account_sid = 'ACd36a1c0e698394be9e6695bef7d51280'
-auth_token = 'a48ccce8fc751e807a1a132fec753ec9'
+auth_token = '438e4aca6ceab5ff45faf2a871e0bf80'
 client = Client(account_sid, auth_token)
 
 message = client.messages.create(
   from_='whatsapp:+14155238886',
-  body='Your appointment is coming up on July 21 at 3PM',
+  body='Your Yummy Cupcakes Company order of 1 dozen frosted cupcakes has shipped and should be delivered on July 10, 2019. Details: http://www.yummycupcakes.com/',
   to='whatsapp:+556285002235'
 )
 

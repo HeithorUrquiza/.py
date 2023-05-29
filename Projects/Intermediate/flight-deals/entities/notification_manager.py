@@ -1,31 +1,19 @@
 import os
-from twilio.rest import Client
+import smtplib
 from dotenv import load_dotenv
 
 load_dotenv()
 
-ACCOUNT_SID = os.getenv("TWILIO_ACCOUNT_SID")
-AUTH_TOKEN = os.getenv("TWILIO_AUTH_TOKEN")
-ACCOUNT_NUMBER = os.getenv("ACC_NUMBER")
-PERSONAL_NUMBER = os.getenv("PSN_NUMBER")
+MY_EMAIL = os.getenv("MY_EMAIL")
+PASSWORD = os.getenv("PASSWORD")
 
 class NotificationManager:
     
-    def send_SMS(self, flight, lowestPrice):
-        account_sid = os.getenv("TWILIO_ACCOUNT_SID")
-        auth_token = os.getenv("TWILIO_AUTH_TOKEN")
-        client = Client(account_sid, auth_token)
-        
-        msg = f"Flight low price alert 🚨\nOnly £{flight.price} to fly from {flight.origin_city}-{flight.origin_airport} to {flight.destination_city}-{flight.destination_airport}, from {flight.out_date} to {flight.return_date}\nAccess: {flight.url} to know more about"
-        
-        if flight.price <= lowestPrice:
-            message = client.messages.create(
-                from_=f"whatsapp:{ACCOUNT_NUMBER}",
-                body=msg,
-                to=f"whatsapp:{PERSONAL_NUMBER}"
-            )
-            print("Mensagem enviada")  
-        else:
-            print(f"{flight.price} > {lowestPrice}")
+    def send_SMS(self, msg, emails):
+        with smtplib.SMTP("smtp.gmail.com") as connection:
+            connection.starttls()
+            connection.login(user=MY_EMAIL, password=PASSWORD)
             
-            
+            for email in emails:
+                connection.sendmail(from_addr=MY_EMAIL, to_addrs=email, msg=f"Subject: Flight Deal\n\n{msg}".encode('utf-8'))  
+                print("Email sent")   

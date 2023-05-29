@@ -1,5 +1,0 @@
-{
-    "python.analysis.extraPaths": [
-        "./Projects/Intermediate/quizzler-app/entities"
-    ]
-}

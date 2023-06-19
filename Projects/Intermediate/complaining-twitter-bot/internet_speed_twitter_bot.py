@@ -26,37 +26,31 @@ class InternetSpeedTwitterBot:
         sleep(3)
     
     
-    def tweet_at_provider(self, email, password, user):
+    def tweet_at_provider(self, email, password, user, msg):
         self.driver.get("https://twitter.com/i/flow/login")
         
         sleep(2)
         email_input = self.driver.find_element(By.NAME, "text")
-        email_input.send_keys("heithorur@gmail.com")
+        email_input.send_keys(email)
         email_input.send_keys(Keys.ENTER)
         
         sleep(2)
         user_input = self.driver.find_element(By.NAME, "text")
-        user_input.send_keys("Hecth_ur")
+        user_input.send_keys(user)
         user_input.send_keys(Keys.ENTER)
         
         sleep(2)
         pass_input = self.driver.find_element(By.NAME, "password")
-        pass_input.send_keys("Hh08112123@")
+        pass_input.send_keys(password)
         pass_input.send_keys(Keys.ENTER)
         
         sleep(2)
-        msg = f"Hey Internet Provider, why is my internet speed {self.down}down/{self.up}up when I pay for 200down/150up?"
+        twt = msg
         tweet_input = self.driver.find_element(By.CSS_SELECTOR, ".public-DraftEditor-content")
-        tweet_input.send_keys(msg)
+        tweet_input.send_keys(twt)
         
         sleep(1)
         tweet_btn = self.driver.find_element(By.XPATH, '//*[@id="react-root"]/div/div/div[2]/main/div/div/div/div/div/div[3]/div/div[2]/div[1]/div/div/div/div[2]/div[2]/div[2]/div/div/div[2]/div/div/span/span')
         tweet_btn.click()
         
         sleep(10)
-
-    
-    
-bot = InternetSpeedTwitterBot()
-bot.get_internet_speed()
-bot.tweet_at_provider("a", "a", "a")

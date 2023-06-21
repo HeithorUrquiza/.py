@@ -26,7 +26,7 @@ class InternetSpeedTwitterBot:
         sleep(3)
     
     
-    def tweet_at_provider(self, email, password, user, msg):
+    def tweet_at_provider(self, email, password, user, down, up):
         self.driver.get("https://twitter.com/i/flow/login")
         
         sleep(2)
@@ -34,18 +34,21 @@ class InternetSpeedTwitterBot:
         email_input.send_keys(email)
         email_input.send_keys(Keys.ENTER)
         
+        try:
+            sleep(2)
+            pass_input = self.driver.find_element(By.NAME, "password")
+            print(pass_input)
+        except:
+            sleep(2)
+            user_input = self.driver.find_element(By.NAME, "text")
+            user_input.send_keys(user)
+            user_input.send_keys(Keys.ENTER)
+        else:
+            pass_input.send_keys(password)
+            pass_input.send_keys(Keys.ENTER)
+            
         sleep(2)
-        user_input = self.driver.find_element(By.NAME, "text")
-        user_input.send_keys(user)
-        user_input.send_keys(Keys.ENTER)
-        
-        sleep(2)
-        pass_input = self.driver.find_element(By.NAME, "password")
-        pass_input.send_keys(password)
-        pass_input.send_keys(Keys.ENTER)
-        
-        sleep(2)
-        twt = msg
+        twt =  f"Hey Internet Provider, why is my internet speed {self.down}down/{self.up}up when I pay for {down}down/{up}up?"
         tweet_input = self.driver.find_element(By.CSS_SELECTOR, ".public-DraftEditor-content")
         tweet_input.send_keys(twt)
         

@@ -9,3 +9,4 @@ Jinja2==3.1.2
 MarkupSafe==2.1.2
 Werkzeug==2.3.4
 WTForms==3.0.1
+'8BYkEfBA6O6donzWlSihBXox7C0sKR6b'

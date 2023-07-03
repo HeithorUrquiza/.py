@@ -31,7 +31,7 @@ class Book(db.Model):
 with app.app_context():
     db.create_all()
     
-with app.app_context():""" 
+""" with app.app_context():
     book = Book(id=1, title="Harry Potter", author="J.K.Rowling", rating=9.3)
     db.session.add(book)
     db.session.commit() """
@@ -39,6 +39,9 @@ with app.app_context():"""
 with app.app_context():
     result = db.session.execute(db.select(Book).order_by(Book.title))
     #print(result.all())
-    all_books = result.scalars()
-    if not all_books:
-        print('vazio')
+    all_books = result.scalars().all()
+   
+    print(all_books)
+    
+    for item in all_books:
+        print(item)

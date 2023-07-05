@@ -1,4 +1,5 @@
 from flask import Flask, render_template
+from flask_bootstrap import Bootstrap
 from flask_bootstrap import Bootstrap5
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField
@@ -9,7 +10,7 @@ import os
 app = Flask(__name__)
 secret_key = os.urandom(24).hex()
 app.config['SECRET_KEY'] = secret_key
-Bootstrap5(app)
+bootstrap = Bootstrap5(app)
 
 
 class CafeForm(FlaskForm):

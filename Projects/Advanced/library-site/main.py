@@ -13,7 +13,7 @@ class Book(db.Model):
     rating = db.Column(db.Float, nullable=False)
     
 with app.app_context():
-    db.create_all()
+    db.create_all() 
 
 
 @app.route('/')
@@ -61,4 +61,3 @@ def delete():
 
 if __name__ == "__main__":
     app.run(debug=True)
-

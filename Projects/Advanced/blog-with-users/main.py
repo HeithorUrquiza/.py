@@ -11,9 +11,12 @@ from functools import wraps
 from sqlalchemy.ext.declarative import declarative_base
 from flask_gravatar import Gravatar
 from forms import *
+from dotenv import load_dotenv
+import os
 
+load_dotenv()
 app = Flask(__name__)
-app.config['SECRET_KEY'] = '8BYkEfBA6O6donzWlSihBXox7C0sKR6b'
+app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 ckeditor = CKEditor(app)
 Bootstrap(app)
 Base = declarative_base()
@@ -26,6 +29,7 @@ gravatar = Gravatar(app,
                     use_ssl=False,
                     base_url=None
                     )
+
 ##CONNECT TO DB
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///C:\\Users\\heith\\Documents\\GitHub\\.py\\Projects\\Advanced\\blog-with-users\\blog.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -81,7 +85,7 @@ class Comment(db.Model, Base):
     parent_post = relationship("BlogPost", back_populates="comments")
     text = db.Column(db.String(250), nullable=True)
     
-db.create_all()
+#db.create_all()
 
 
 @app.route('/')

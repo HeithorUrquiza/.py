@@ -1,6 +1,8 @@
 import scrapy
 from scrapy.crawler import CrawlerProcess
 from scrapy.exporters import CsvItemExporter
+from utils.analyzer import Analyzer
+from utils.translator import Translator
 
 class InvestingSpider(scrapy.Spider):
     name = "investing"
@@ -12,10 +14,10 @@ class InvestingSpider(scrapy.Spider):
             if news is not None:
                 yield response.follow(url=news, callback=self.collect)
         
-        next_pag = response.xpath('//*[@id="paginationWrap"]/div[3]/a').attrib['href']
+        """ next_pag = response.xpath('//*[@id="paginationWrap"]/div[3]/a').attrib['href']
         if next_pag != '/news/commodities-news/5':
             yield response.follow(url=next_pag, callback=self.parse)
-                
+                 """
 
     def collect(self, response):
         res = response.css(".articlePage p::text").getall()
@@ -24,16 +26,13 @@ class InvestingSpider(scrapy.Spider):
             article = ' '.join(res)
             article = article.replace("Posição adicionada com êxito a:  \n ", "")
             yield {"text": f"{article[0:1385]}"}
-        else:
-            yield {"text": "Not relevant news"}
-            
-        home = "https://br.investing.com/news/commodities-news"
-        yield response.follow(url=home, callback=self.parse)
-            
+        
 
 
 if __name__ == "__main__":
-    path = "myenv\investing\investing\spiders\data\dados.csv"
+    path = "myenv/utils/data/dados.csv"
+    trans_path = "myenv/utils/data/translateData.csv"
+    analy_path = "myenv/utils/data/analysisData.csv"
     
     process = CrawlerProcess({
         'USER_AGENT': 'Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1)',
@@ -49,4 +48,10 @@ if __name__ == "__main__":
     process.start()
 
     # Stop the exporter after the scraping
-    exporter.finish_exporting()
+    exporter.finish_exporting() 
+    
+    #translator = Translator(trans_path)
+    #translator.translate(path=path)
+    
+    #analyzer = Analyzer(analy_path)
+    #analyzer.analyze(trans_path)

@@ -9,15 +9,15 @@ class InvestingSpider(scrapy.Spider):
     start_urls = ["https://br.investing.com/news/commodities-news"]
 
     def parse(self, response):
-        for article in response.css("#leftColumn .textDiv"):
-            news = article.css(".title ::attr(href)").get()  
-            if news is not None:
-                yield response.follow(url=news, callback=self.collect)
+        #for article in response.css("#leftColumn .textDiv"):
+            #news = article.css(".title ::attr(href)").get()  
+            #if news is not None:
+            yield response.follow(url="https://br.investing.com/news/economy/emenda-incluida-em-projeto-na-camara-pode-aumentar-preco-de-combustiveis-diz-associacao-1153343", callback=self.collect)
         
-        """ next_pag = response.xpath('//*[@id="paginationWrap"]/div[3]/a').attrib['href']
+    """     next_pag = response.xpath('//*[@id="paginationWrap"]/div[3]/a').attrib['href']
         if next_pag != '/news/commodities-news/5':
-            yield response.follow(url=next_pag, callback=self.parse)
-                 """
+            yield response.follow(url=next_pag, callback=self.parse) """
+                
 
     def collect(self, response):
         res = response.css(".articlePage p::text").getall()
@@ -25,7 +25,7 @@ class InvestingSpider(scrapy.Spider):
         if res is not None:
             article = ' '.join(res)
             article = article.replace("Posição adicionada com êxito a:  \n ", "")
-            yield {"text": f"{article[0:1385]}"}
+            yield {"text": f"{article}"}
         
 
 
@@ -50,8 +50,11 @@ if __name__ == "__main__":
     # Stop the exporter after the scraping
     exporter.finish_exporting() 
     
-    #translator = Translator(trans_path)
-    #translator.translate(path=path)
+    translator = Translator(trans_path)
+    translator.translate(path=path)
     
-    #analyzer = Analyzer(analy_path)
-    #analyzer.analyze(trans_path)
+    analyzer = Analyzer(analy_path)
+    analyzer.analyze(trans_path)
+    
+    
+    # Pesquisar a respeito da analise do sentimento do Orange.

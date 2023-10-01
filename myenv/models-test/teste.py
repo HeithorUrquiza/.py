@@ -31,7 +31,7 @@ from transformers import pipeline
 model_path = "cardiffnlp/twitter-xlm-roberta-base-sentiment"
 pipe = pipeline("sentiment-analysis", model=model_path, tokenizer=model_path, max_length=512, truncation=True)
 
-text = "Today was the best day of my life"
+text = "I think we should break"
 print(pipe(text))
 
 
